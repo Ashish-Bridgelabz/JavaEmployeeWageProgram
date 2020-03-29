@@ -6,9 +6,10 @@ public class  EmployeeWage{
 	public static final int MAX_HRS_IN_MONTH=100; 
 
 	public static void main(String[] args){
-		//WE ARE TAKING VARIABLE
+	employeeFunction();}
+	static void employeeFunction(){
+		//WE ARE TAKING LOCAL VARIABLE
 		int empHrs=0,totalEmpHrs=0,totalWorkingDays=0;
-		//COMPUTATION//
 		while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAY){
 				totalWorkingDays++;
 			int empCheck = (int) Math.floor(Math.random()*10)%3;
@@ -29,3 +30,5 @@ public class  EmployeeWage{
 		System.out.println( "TotalEmpWage:" +totalEmpWage);
 	}
 }
+
+

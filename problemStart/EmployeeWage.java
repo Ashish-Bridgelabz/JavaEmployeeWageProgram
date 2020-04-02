@@ -1,7 +1,9 @@
+import java.util.*;
+
 //USING INTERFACE CLASS//
 interface MultipleCompanies	{
 
-	public void totalEmpWageMath( EmpWageBuilder obj );
+	public void totalEmpWageMath( EmpWageBuilder emp );
 }
 
 public class  EmployeeWage implements MultipleCompanies{
@@ -13,7 +15,7 @@ public class  EmployeeWage implements MultipleCompanies{
 
 	public void totalEmpWageMath( EmpWageBuilder company ){
 		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
-		while( totalEmpHrs <= company.getMaxHrsInMonth() && totalWorkingDays < company.getMaxNumOfWorkingDays() )  {
+		while( totalEmpHrs <= company.getMaxHrsInMonth() && totalWorkingDays < company.getNumOfWorkingDays() )  {
 			totalWorkingDays++;
 			int empCheck = (int) ( Math.random() * 10 ) % 3;
 			switch (empCheck) {
@@ -32,16 +34,17 @@ public class  EmployeeWage implements MultipleCompanies{
 		company.setTotalEmpWage( totalEmpHrs * company.getEmpRatePerHour() );
 		System.out.println( "Employee is " + company.getTotalEmpWage());	
 	}
-
+	//MAIN METHOD//
 	public static void main(String[] args){
 		EmployeeWage empwage = new EmployeeWage();
-		//DECLARE ARRAY
-		EmpWageBuilder[] company = new EmpWageBuilder[2];
+		//DECLARE ARRAYLIST
+		ArrayList<EmpWageBuilder> company = new ArrayList<EmpWageBuilder>();
 
-		company[0] = new EmpWageBuilder( 20,25,80 );
-		empwage.totalEmpWageMath( company[0] );
-		company[1] = new EmpWageBuilder( 30,20,100 );
-   	empwage.totalEmpWageMath( company[1] );
+		company.add( new EmpWageBuilder( 20,25,80 ));
+		empwage.totalEmpWageMath( company.get(0));
+
+		company.add( new EmpWageBuilder( 30,20,100 ));
+   	empwage.totalEmpWageMath( company.get(1));
 	}
 }
 
@@ -62,7 +65,7 @@ class EmpWageBuilder{
 		return EMP_RATE_PER_HOUR;
 	}
 
-	public int getMaxNumOfWorkingDays()	{
+	public int getNumOfWorkingDays()	{
 		return NUM_OF_WORKING_DAYS;
 	}
 
@@ -77,5 +80,5 @@ class EmpWageBuilder{
 	public int getTotalEmpWage()  {
 	return totalEmpWage;
 	}
-	System.out.println( +totalEmpWage )
 }
+

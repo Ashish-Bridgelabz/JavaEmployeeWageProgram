@@ -12,9 +12,11 @@ public class  EmployeeWage implements MultipleCompanies{
 	public static int EMP_RATE_PER_HOUR;
 	public static int NUM_OF_WORKING_DAYS;
 	public static int MAX_HRS_IN_MONTH;
+	//	STORE TOTAL DAILY WAGE IN ARRAYLIST// 
+	ArrayList<Integer>  dailyEmpTotalWage = new ArrayList<Integer>();
 
 	public void totalEmpWageMath( EmpWageBuilder company ){
-		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
+		int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0,storeDailyWage = 0,totalEmpWage=0;;
 		while( totalEmpHrs <= company.getMaxHrsInMonth() && totalWorkingDays < company.getNumOfWorkingDays() )  {
 			totalWorkingDays++;
 			int empCheck = (int) ( Math.random() * 10 ) % 3;
@@ -29,15 +31,19 @@ public class  EmployeeWage implements MultipleCompanies{
 						empHrs = 0;
 			}
 			totalEmpHrs += empHrs;
-			System.out.println("Day#: " + totalWorkingDays + " Emp Hr: " +  empHrs);
+			storeDailyWage = empHrs * company.getEmpRatePerHour();
+			dailyEmpTotalWage.add( storeDailyWage );
+			System.out.println("Day: " + totalWorkingDays + " Emp Hr: " +  empHrs);
 		}
-		company.setTotalEmpWage( totalEmpHrs * company.getEmpRatePerHour() );
+		totalEmpWage = totalEmpHrs * company.getEmpRatePerHour(); 
+		dailyEmpTotalWage.add( totalEmpWage );
+		company.setTotalEmpWage( totalEmpWage ); 
 		System.out.println( "Employee is " + company.getTotalEmpWage());	
 	}
 	//MAIN METHOD//
 	public static void main(String[] args){
 		EmployeeWage empwage = new EmployeeWage();
-		//DECLARE ARRAYLIST
+		//DECLARE ARRAYLIST//
 		ArrayList<EmpWageBuilder> company = new ArrayList<EmpWageBuilder>();
 
 		company.add( new EmpWageBuilder( 20,25,80 ));
@@ -60,7 +66,7 @@ class EmpWageBuilder{
 			this.NUM_OF_WORKING_DAYS = NUM_OF_WORKING_DAYS;
 			this.MAX_HRS_IN_MONTH = MAX_HRS_IN_MONTH;
 	}
-	//USING SETTER AND GETTER METHOD
+	//USING SETTER AND GETTER METHOD//
 	public int getEmpRatePerHour()	{
 		return EMP_RATE_PER_HOUR;
 	}
